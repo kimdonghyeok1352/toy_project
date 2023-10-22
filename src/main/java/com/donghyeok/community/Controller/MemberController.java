@@ -31,7 +31,7 @@ public class MemberController {
     MemberDTO memberLogin(HttpServletRequest request, HttpSession session, @ModelAttribute MemberDTO memberDTO){
         memberDTO = memberService.memberLogin(memberDTO);
         if(memberDTO != null){
-            session.setAttribute("member_info_Id",memberDTO.getMember_info_id());
+            session.setAttribute("member_info_Id" + memberDTO.getMember_info_id(),memberDTO.getMember_info_id());
             return memberDTO;
         }else{
             return null;
@@ -42,6 +42,11 @@ public class MemberController {
     @DeleteMapping("/logOut")
     Boolean memberLogOut(HttpServletRequest request, HttpSession session ,@RequestParam(value = "member_info_id")Long id){
 
-        memberService.memberLogOut((id));
+        if(memberService.memberLogOut((id))){
+            session.removeAttribute(("member_info_Id"+ id));
+            return true;
+        }else {
+            return false;
+        }
     }
 }

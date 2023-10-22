@@ -43,5 +43,11 @@ public class MemberService {
 
     public Boolean memberLogOut(Long memberInfoId){
 
+        Optional<MemberInfoEntity> optionalMemberInfoEntity = memberInfoRepository.findById(memberInfoId);
+        if(optionalMemberInfoEntity.isPresent()){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
