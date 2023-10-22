@@ -1,4 +1,13 @@
 package com.donghyeok.community.MemberInfoRepository;
 
-public interface MemberInfoRepository {
+import com.donghyeok.community.entity.MemberInfoEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface MemberInfoRepository extends JpaRepository<MemberInfoEntity,Long> {
+
+    boolean existsByMemberId(String memberId);
+
+    Optional<MemberInfoEntity> findByMemberId(String memberId);
 }
