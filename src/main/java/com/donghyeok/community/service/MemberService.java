@@ -15,11 +15,12 @@ public class MemberService {
     private final MemberInfoRepository memberInfoRepository;
     public Boolean memberJoin (MemberDTO memberDTO){
 
-        if(memberInfoRepository.existsByMemberId(memberDTO.getMember_id()) == true){
+        MemberInfoEntity memberInfoEntity = new MemberInfoEntity();
+        System.out.println("memberInfoEntity.toMemberInfoEntity(memberDTO).getMemberId()" + memberInfoEntity.toMemberInfoEntity(memberDTO).getMemberId());
+        if(memberInfoRepository.existsByMemberId(memberInfoEntity.toMemberInfoEntity(memberDTO).getMemberId()) == true){
             System.out.println("중복아이디 | 처리불가");
             return false;
         }else{
-            MemberInfoEntity memberInfoEntity = new MemberInfoEntity();
             memberInfoRepository.save(memberInfoEntity.toMemberInfoEntity(memberDTO));
             return true;
         }

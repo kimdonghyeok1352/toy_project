@@ -21,8 +21,10 @@ public class MemberController {
     private final MemberService memberService;
 
     //회원가입
+    
     @PostMapping("/signIn")
     Boolean memberJoin(HttpServletRequest request, @ModelAttribute MemberDTO memberDTO){
+        System.out.println("api 호출");
         memberService.memberJoin(memberDTO);
         return true;
     }
@@ -49,4 +51,6 @@ public class MemberController {
             return false;
         }
     }
+
+
 }
