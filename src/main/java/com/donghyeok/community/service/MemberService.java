@@ -51,4 +51,40 @@ public class MemberService {
             return false;
         }
     }
+
+    public  MemberDTO findByIdPassWord(MemberDTO memberDTO){
+        Optional<MemberInfoEntity> optionalMemberInfoEntity = memberInfoRepository.findByMemberId(memberDTO.getMember_id());
+        if(optionalMemberInfoEntity.isPresent()){
+            return  memberDTO;
+        }else{
+            return null;
+        }
+    }
+
+    public  MemberDTO memberInfo(Long memberInfoId){
+        MemberDTO memberDTO = new MemberDTO();
+        Optional<MemberInfoEntity> MemberInfoEntity = memberInfoRepository.findById(memberInfoId);
+        if(MemberInfoEntity.isPresent()){ //조회 성공
+            return memberDTO.toMemberDTO(MemberInfoEntity.get());
+        }else{//조회 실패
+            return null;
+        }
+    }
+    public  MemberDTO memberDelete(Long memberInfoId){
+        MemberDTO memberDTO = new MemberDTO();
+        Optional<MemberInfoEntity> MemberInfoEntity = memberInfoRepository.findById(memberInfoId);
+        if(MemberInfoEntity.isPresent()){ //맞는 아이디 있으면 삭제
+            memberInfoRepository.delete(MemberInfoEntity.get());
+            return memberDTO.toMemberDTO(MemberInfoEntity.get());
+        }else{
+            return null;
+        }
+    }
+
+    public void memberUpdate(MemberDTO memberDTO){
+        Optional<MemberInfoEntity> MemberInfoEntity = memberInfoRepository.findById(memberDTO.getMember_info_id());
+        if(MemberInfoEntity.isPresent()){
+
+        }
+    }
 }
