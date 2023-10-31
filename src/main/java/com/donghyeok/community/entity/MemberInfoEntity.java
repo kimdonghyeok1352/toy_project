@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor //모든 필드 값을 파라미터로 받는 생성자 생성
 @Builder
-@Table(name = "member_info")
+@Table(name="member_info")
 public class MemberInfoEntity {
 
     @Column(name = "member_info_id")

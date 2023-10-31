@@ -71,6 +71,6 @@ public class MemberController {
 
         @PostMapping("/memberUpdate")
             MemberDTO memberUpdate(HttpServletRequest request ,@ModelAttribute MemberDTO memberDTO){
-
+            return memberDTO;
         }
 }
