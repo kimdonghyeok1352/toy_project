@@ -48,25 +48,14 @@ public class MemberInfoEntity {
     @Column(name = "updated_at")
     private LocalDateTime updateAt;
 
-
-    //memberDTO > MemberInfoEntity
-
-
-    public MemberInfoEntity toMemberInfoEntity(MemberDTO memberDTO){
-
+    public MemberInfoEntity tomemberInfoEntity(MemberDTO.requestMemberJoin requestmemberjoin){
         MemberInfoEntity memberInfoEntity = MemberInfoEntity.builder()
-                .memberInfoId(memberDTO.getMember_info_id())
-                .memberId(memberDTO.getMember_id())
-                .password(memberDTO.getPassword())
-                .nickName(memberDTO.getNick_name())
-                .phoneNumber(memberDTO.getPhone_number())
-                .status(memberDTO.getStatus())
-                .grade(memberDTO.getGrade())
-                .createAt(memberDTO.getCreated_at())
-                .updateAt(memberDTO.getUpdated_at())
+                .memberId(requestmemberjoin.getMember_id())
+                .password(requestmemberjoin.getPassword())
+                .email(requestmemberjoin.getEmail())
+                .phoneNumber(requestmemberjoin.getPhone_number())
                 .build();
-
-
-    return memberInfoEntity;
+        return memberInfoEntity;
     }
+
 }

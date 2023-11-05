@@ -3,6 +3,7 @@ package com.donghyeok.community.Controller;
 import com.donghyeok.community.DTO.MemberDTO;
 import com.donghyeok.community.common.ProjectVersion;
 import com.donghyeok.community.service.MemberService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -23,24 +24,22 @@ public class MemberController {
         private final MemberService memberService;
 
         //회원가입
-
         @PostMapping("/signIn")
-        Boolean memberJoin(HttpServletRequest request, @ModelAttribute MemberDTO memberDTO){
-            System.out.println("api 호출");
-            memberService.memberJoin(memberDTO);
-            return true;
+        MemberDTO.responseMemberJoin memberJoin(@ModelAttribute MemberDTO.requestMemberJoin requestmemberJoin){
+            return memberService.memberJoin(requestmemberJoin);
+
         }
 
         @PostMapping("/logIn")
         MemberDTO memberLogin(HttpServletRequest request, HttpSession session, @ModelAttribute MemberDTO memberDTO){
             memberDTO = memberService.memberLogin(memberDTO);
-            if(memberDTO != null){
-                session.setAttribute("member_info_Id" + memberDTO.getMember_info_id(),memberDTO.getMember_info_id());
-                return memberDTO;
-            }else{
-                return null;
-            }
-
+//            if(memberDTO != null){
+//                session.setAttribute("member_info_Id" + memberDTO.getMember_info_id(),memberDTO.getMember_info_id());
+//                return memberDTO;
+//            }else{
+//                return null;
+//            }
+            return null;
         }
 
         @DeleteMapping("/logOut")
@@ -56,7 +55,8 @@ public class MemberController {
 
         @PostMapping("/findPassword")
         String findByIdPassWord(HttpServletRequest request,  @ModelAttribute MemberDTO memberDTO){
-            return memberService.findByIdPassWord(memberDTO).getPassword();
+//            return memberService.findByIdPassWord(memberDTO).getPassword();
+            return null;
         }
 
         @GetMapping("/memberInfo/{member_info_id}")
