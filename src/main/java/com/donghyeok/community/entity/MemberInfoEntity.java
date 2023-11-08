@@ -48,14 +48,14 @@ public class MemberInfoEntity {
     @Column(name = "updated_at")
     private LocalDateTime updateAt;
 
-    public MemberInfoEntity tomemberInfoEntity(MemberDTO.requestMemberJoin requestmemberjoin){
-        MemberInfoEntity memberInfoEntity = MemberInfoEntity.builder()
+    public MemberInfoEntity tomemberInfoEntity(MemberDTO.RequestMemberJoin requestmemberjoin){
+
+        return MemberInfoEntity.builder()
                 .memberId(requestmemberjoin.getMember_id())
                 .password(requestmemberjoin.getPassword())
                 .email(requestmemberjoin.getEmail())
                 .phoneNumber(requestmemberjoin.getPhone_number())
                 .build();
-        return memberInfoEntity;
     }
 
 }

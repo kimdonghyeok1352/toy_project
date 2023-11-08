@@ -14,32 +14,54 @@ public class MemberDTO {
     @AllArgsConstructor //모든 필드 값을 파라미터로 받는 생성자 생성
     @Getter
     @Builder
-    public static class requestMemberJoin{
+    public static class RequestMemberJoin{
         private String member_id;
         private String password;
         private String email;
         private String phone_number;
 
-
     }
+
+    @AllArgsConstructor
+    @Getter
+    public static class LoginRequest{
+        private String member_id;
+        private String password;
+    }
+
     @AllArgsConstructor //모든 필드 값을 파라미터로 받는 생성자 생성
     @NoArgsConstructor
     @Getter
     @Builder
-    public static class responseMemberJoin{
+    public static class ResponseMemberJoin{
         private String member_id;
         private String password;
         private String email;
         private String phone_number;
 
-        public responseMemberJoin memberJoin(MemberInfoEntity memberInfoEntity) {
-            responseMemberJoin responsememberjoin =
-                    responseMemberJoin.builder().
-                            member_id(memberInfoEntity.getMemberId())
-                            .password(memberInfoEntity.getPassword())
-                            .email(memberInfoEntity.getEmail())
-                            .phone_number(memberInfoEntity.getPhoneNumber()).build();
-            return responsememberjoin;
+        public ResponseMemberJoin memberJoin(MemberInfoEntity memberInfoEntity) {
+
+            return ResponseMemberJoin.builder().
+                    member_id(memberInfoEntity.getMemberId())
+                    .password(memberInfoEntity.getPassword())
+                    .email(memberInfoEntity.getEmail())
+                    .phone_number(memberInfoEntity.getPhoneNumber()).build();
+        }
+    }
+
+    @AllArgsConstructor //모든 필드 값을 파라미터로 받는 생성자 생성
+    @Getter
+    @Builder
+    public static class LoginResponse{
+        private String member_id;
+        private String password;
+
+        public LoginResponse memberLogin(MemberInfoEntity memberInfoEntity){
+
+            return LoginResponse.builder().
+                    member_id(memberInfoEntity.getMemberId()).
+                    password(memberInfoEntity.getPassword()).
+                    build();
         }
     }
 

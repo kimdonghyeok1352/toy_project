@@ -25,20 +25,14 @@ public class MemberController {
 
         //회원가입
         @PostMapping("/signIn")
-        MemberDTO.responseMemberJoin memberJoin(@ModelAttribute MemberDTO.requestMemberJoin requestmemberJoin){
+        MemberDTO.ResponseMemberJoin memberJoin(@ModelAttribute MemberDTO.RequestMemberJoin requestmemberJoin){
             return memberService.memberJoin(requestmemberJoin);
 
         }
 
         @PostMapping("/logIn")
-        MemberDTO memberLogin(HttpServletRequest request, HttpSession session, @ModelAttribute MemberDTO memberDTO){
+        MemberDTO memberLogin(@ModelAttribute MemberDTO memberDTO){
             memberDTO = memberService.memberLogin(memberDTO);
-//            if(memberDTO != null){
-//                session.setAttribute("member_info_Id" + memberDTO.getMember_info_id(),memberDTO.getMember_info_id());
-//                return memberDTO;
-//            }else{
-//                return null;
-//            }
             return null;
         }
 

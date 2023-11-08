@@ -13,27 +13,24 @@ import java.util.Optional;
 public class MemberService {
 
     private final MemberInfoRepository memberInfoRepository;
-    public MemberDTO.responseMemberJoin memberJoin (MemberDTO.requestMemberJoin requestmemberjoin){
-        MemberInfoEntity memberInfoEntity = new MemberInfoEntity();
-        MemberDTO.responseMemberJoin responseMemberJoin = new MemberDTO.responseMemberJoin();
-        memberInfoEntity = memberInfoRepository.save(memberInfoEntity.tomemberInfoEntity(requestmemberjoin));
-        return responseMemberJoin.memberJoin(memberInfoEntity);
+    public MemberDTO.ResponseMemberJoin memberJoin (MemberDTO.RequestMemberJoin requestMemberjoin){
+
+        Optional<MemberInfoEntity> byMemberId = memberInfoRepository.findByMemberId(requestMemberjoin.getMember_id());
+        if(byMemberId.isPresent()){
+            return new MemberDTO.ResponseMemberJoin();
+        }
+
+        return new MemberDTO.ResponseMemberJoin().
+                memberJoin(memberInfoRepository.save(new MemberInfoEntity().tomemberInfoEntity(requestMemberjoin)));
 
     }
 
     //로그인
-    public MemberDTO memberLogin(MemberDTO memberDTO){
-//        Optional<MemberInfoEntity> byMemberId = memberInfoRepository.findByMemberId(memberDTO.getMember_id());
-//        if(byMemberId.isPresent()){ //아이디 조회가 있을 경우
-//            MemberInfoEntity memberInfoEntity = byMemberId.get();
-////            if(memberInfoEntity.getPassword().equals(memberDTO.getPassword())){ //비밀번호가 같을 경우 로그인 성공
-////                return memberDTO;
-////            }else{ //비밀번호 불일치
-////                return null;
-////            }
-//        }else{//아이디 조회가 없을 경우
-//            return null;
-//        }
+    public MemberDTO.LoginResponse memberLogin(MemberDTO.LoginRequest loginRequest){
+        Optional<MemberInfoEntity> byMemberId = memberInfoRepository.findByMemberId(loginRequest.getMember_id()).orElseThrow(() -> new RuntimeException());
+        if(byMemberId.isPresent()){ //아이디
+            byMemberId.orElseThrow(() -> new RuntimeException("아이디 틀렸는데요"));
+        }
         return null;
 
     }
