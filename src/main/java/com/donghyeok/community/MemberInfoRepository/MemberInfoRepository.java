@@ -1,5 +1,6 @@
 package com.donghyeok.community.MemberInfoRepository;
 
+import com.donghyeok.community.DTO.MemberDTO;
 import com.donghyeok.community.entity.MemberInfoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,4 +11,5 @@ public interface MemberInfoRepository extends JpaRepository<MemberInfoEntity,Lon
     boolean existsByMemberId(String memberId);
 
     Optional<MemberInfoEntity> findByMemberId(String memberId);
+    Optional<MemberInfoEntity> findByMemberIdAndPassword(String memberId,String passWord);
 }

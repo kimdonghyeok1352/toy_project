@@ -50,6 +50,7 @@ public class MemberDTO {
     }
 
     @AllArgsConstructor //모든 필드 값을 파라미터로 받는 생성자 생성
+    @NoArgsConstructor
     @Getter
     @Builder
     public static class LoginResponse{

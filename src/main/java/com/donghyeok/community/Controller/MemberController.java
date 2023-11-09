@@ -26,14 +26,15 @@ public class MemberController {
         //회원가입
         @PostMapping("/signIn")
         MemberDTO.ResponseMemberJoin memberJoin(@ModelAttribute MemberDTO.RequestMemberJoin requestmemberJoin){
+
             return memberService.memberJoin(requestmemberJoin);
 
         }
 
         @PostMapping("/logIn")
-        MemberDTO memberLogin(@ModelAttribute MemberDTO memberDTO){
-            memberDTO = memberService.memberLogin(memberDTO);
-            return null;
+        MemberDTO.LoginResponse loginResponse(@ModelAttribute MemberDTO.LoginRequest loginRequest){
+
+            return memberService.memberLogin(loginRequest);
         }
 
         @DeleteMapping("/logOut")

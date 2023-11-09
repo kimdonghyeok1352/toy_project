@@ -27,12 +27,12 @@ public class MemberService {
 
     //로그인
     public MemberDTO.LoginResponse memberLogin(MemberDTO.LoginRequest loginRequest){
-        Optional<MemberInfoEntity> byMemberId = memberInfoRepository.findByMemberId(loginRequest.getMember_id()).orElseThrow(() -> new RuntimeException());
-        if(byMemberId.isPresent()){ //아이디
-            byMemberId.orElseThrow(() -> new RuntimeException("아이디 틀렸는데요"));
-        }
-        return null;
+        MemberInfoEntity byMemberId = memberInfoRepository.findByMemberId(loginRequest.getMember_id()).
+                orElseThrow(()->new RuntimeException("없는 아이디 입니다."));
+        MemberInfoEntity byMemberIdPassWord = memberInfoRepository.findByMemberIdAndPassword(loginRequest.getMember_id(),loginRequest.getPassword())
+                .orElseThrow(()->new RuntimeException("비밀번호가 일치 하지 않습니다."));
 
+        return new MemberDTO.LoginResponse().memberLogin(byMemberIdPassWord);
     }
 
     public Boolean memberLogOut(Long memberInfoId){
