@@ -32,30 +32,15 @@ public class MemberController {
         }
 
         @PostMapping("/logIn")
-        MemberDTO.LoginResponse loginResponse(@ModelAttribute MemberDTO.LoginRequest loginRequest){
-
-            return memberService.memberLogin(loginRequest);
+        MemberDTO.LoginResponse loginResponse(@ModelAttribute MemberDTO.LoginRequest loginRequest,HttpSession session){
+            MemberDTO.LoginResponse loginResponse = memberService.memberLogin(loginRequest);
+            session.setAttribute("member_info_id",loginResponse.getMember_info_id());
+            return loginResponse;
         }
 
-        @DeleteMapping("/logOut")
-        Boolean memberLogOut(HttpServletRequest request, HttpSession session ,@RequestParam(value = "member_info_id")Long id){
-
-            if(memberService.memberLogOut((id))){
-                session.removeAttribute(("member_info_Id"+ id));
-                return true;
-            }else {
-                return false;
-            }
-        }
-
-        @PostMapping("/findPassword")
-        String findByIdPassWord(HttpServletRequest request,  @ModelAttribute MemberDTO memberDTO){
-//            return memberService.findByIdPassWord(memberDTO).getPassword();
-            return null;
-        }
 
         @GetMapping("/memberInfo/{member_info_id}")
-        MemberDTO memberInfo (HttpServletRequest request, @PathVariable("member_info_id") Long memberInfoId){
+        MemberDTO.MemberInfoResponse memberInfo (@PathVariable("member_info_id") Long memberInfoId,HttpSession session){
             return memberService.memberInfo(memberInfoId);
         }
 

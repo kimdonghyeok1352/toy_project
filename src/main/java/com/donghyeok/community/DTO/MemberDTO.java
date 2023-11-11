@@ -29,6 +29,15 @@ public class MemberDTO {
         private String password;
     }
 
+    @AllArgsConstructor
+    @Getter
+    public static class MemberInfoRequest{
+        private String member_id;
+        private String password;
+    }
+
+
+
     @AllArgsConstructor //모든 필드 값을 파라미터로 받는 생성자 생성
     @NoArgsConstructor
     @Getter
@@ -54,6 +63,7 @@ public class MemberDTO {
     @Getter
     @Builder
     public static class LoginResponse{
+        private Long member_info_id;
         private String member_id;
         private String password;
 
@@ -66,5 +76,35 @@ public class MemberDTO {
         }
     }
 
+    @AllArgsConstructor
+    @Getter
+    @NoArgsConstructor
+    @Builder
+    public static class MemberInfoResponse{
+        private Long memberInfoId;
+        private String memberId;
+        private String password;
+        private String nickName;
+        private String email;
+        private String phoneNumber;
+        private String status;
+        private String grade;
+        private LocalDateTime createAt;
+        private LocalDateTime updateAt;
+        public  MemberInfoResponse memberInfo(MemberInfoEntity memberInfoEntity){
+
+            return MemberInfoResponse.builder().
+                    memberInfoId(memberInfoEntity.getMemberInfoId()).
+                    memberId(memberInfoEntity.getMemberId()).
+                    password(memberInfoEntity.getPassword()).
+                    nickName(memberInfoEntity.getNickName()).
+                    email(memberInfoEntity.getEmail()).
+                    phoneNumber(memberInfoEntity.getPhoneNumber()).
+                    status(memberInfoEntity.getStatus()).
+                    grade(memberInfoEntity.getGrade()).
+                    createAt(memberInfoEntity.getCreateAt()).
+                    updateAt(memberInfoEntity.getUpdateAt()).build();
+        }
+    }
 
 }

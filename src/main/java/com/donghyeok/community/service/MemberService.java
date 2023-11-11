@@ -35,35 +35,12 @@ public class MemberService {
         return new MemberDTO.LoginResponse().memberLogin(byMemberIdPassWord);
     }
 
-    public Boolean memberLogOut(Long memberInfoId){
 
-        Optional<MemberInfoEntity> optionalMemberInfoEntity = memberInfoRepository.findById(memberInfoId);
-        if(optionalMemberInfoEntity.isPresent()){
-            return true;
-        }else{
-            return false;
-        }
-    }
 
-    public  MemberDTO findByIdPassWord(MemberDTO memberDTO){
-//        Optional<MemberInfoEntity> optionalMemberInfoEntity = memberInfoRepository.findByMemberId(memberDTO.getMember_id());
-//        if(optionalMemberInfoEntity.isPresent()){
-//            return  memberDTO;
-//        }else{
-//            return null;
-//        }
-        return  null;
-    }
+    public  MemberDTO.MemberInfoResponse memberInfo(Long memberprimaryId){
+        Optional<MemberInfoEntity> memberInfoEntity = memberInfoRepository.findByMemberInfoId(memberprimaryId);
 
-    public  MemberDTO memberInfo(Long memberInfoId){
-        MemberDTO memberDTO = new MemberDTO();
-//        Optional<MemberInfoEntity> MemberInfoEntity = memberInfoRepository.findById(memberInfoId);
-//        if(MemberInfoEntity.isPresent()){ //조회 성공
-//            return memberDTO.toMemberDTO(MemberInfoEntity.get());
-//        }else{//조회 실패
-//            return null;
-//        }
-        return null;
+        return new MemberDTO.MemberInfoResponse().memberInfo(memberInfoEntity.get());
     }
     public  MemberDTO memberDelete(Long memberInfoId){
         MemberDTO memberDTO = new MemberDTO();

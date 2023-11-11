@@ -38,7 +38,7 @@ public class MemberInfoEntity {
     private String status;
 
     @Column(name = "grade")
-    private  String grade;
+    private String grade;
 
     @CreationTimestamp
     @Column(name = "created_at")
