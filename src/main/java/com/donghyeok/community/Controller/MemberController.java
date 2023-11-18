@@ -53,4 +53,5 @@ public class MemberController {
             MemberDTO memberUpdate(HttpServletRequest request ,@ModelAttribute MemberDTO memberDTO){
             return memberDTO;
         }
+
 }
